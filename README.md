@@ -11,7 +11,7 @@ Two implementations of John Conway's classic **Game of Life** cellular automaton
 
 | Python (HD, pygame) | Commodore 64 (BASIC V2, VICE) |
 | :---: | :---: |
-| ![Python HD demo](assets/python_demo.gif) | ![C64 BASIC demo](assets/c64_demo.gif) |
+| ![Python HD demo](assets/gof_hd_gunners.gif) | ![C64 BASIC demo](assets/gof_basic.gif) |
 
 <sub>*Drop your recorded GIFs into `assets/python_demo.gif` and `assets/c64_demo.gif` to replace the placeholders.*</sub>
 
