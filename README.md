@@ -45,9 +45,33 @@ Both implementations here use a **toroidal grid**: cells that leave one edge re-
 
 ### Included patterns
 
-* **Gosper Glider Gun** — the first known finite pattern that grows without bound, emitting gliders forever.
-* **Pulsar** — a period-3 oscillator, one of the most common natural oscillators.
-* **Acorn** — a 7-cell methuselah that stabilises only after 5206 generations, producing 633 cells.
+Both implementations ship with the same three built-in starting configurations. You can load any of them from the menu, or start from an empty / random grid and design your own:
+
+* **Gosper Glider Gun** — the first known finite pattern that grows without bound, emitting a stream of gliders forever. Discovered by Bill Gosper in 1970 and worth the €50 prize Conway offered for a pattern that grew indefinitely.
+* **Pulsar** — a period-3 oscillator, one of the most common naturally-occurring oscillators. Fills a 13×13 bounding box and cycles through three distinct shapes.
+* **Acorn** — a 7-cell **methuselah**: it looks trivial, but takes **5206 generations** to stabilise, ending up with 633 live cells scattered across a huge area. Great to leave running.
+
+### Starting-state options
+
+In both versions you can decide how the simulation begins:
+
+1. **Load a preset** — pick Gosper Glider Gun, Pulsar or Acorn from the menu. The pattern is placed centred on the grid.
+2. **Custom (empty) grid** — start blank and use the cursor / mouse to paint the cells you want alive. Perfect for experimenting with your own designs (spaceships, still lifes, guns…).
+3. **Random grid** — the grid is filled with a random distribution of live cells (~30% density in the Python version, uniform random in the BASIC version). Great for seeing chaotic decay into stable ecosystems.
+
+Even after loading a preset or a random grid you remain in **edit mode** first: nothing evolves until you press `RETURN`, so you can freely add or remove cells before starting.
+
+### Configuring the number of generations
+
+When configuring a run, both versions ask you for a **maximum number of generations** (`GMAX`). The simulation runs until either:
+
+* you reach `GMAX` (the run stops on the last generation and shows `FIN`), or
+* you press `Q` to return to the menu.
+
+Sensible values:
+
+* Python: anything from `100` for a quick demo to `1_000_000` for long methuselahs like Acorn.
+* C64: keep it modest — see the performance note below.
 
 ---
 
@@ -194,6 +218,16 @@ RUN
 | `Q` | Return to menu |
 
 The status row at the bottom of the screen shows `GEN:x/GMAX` while the simulation runs.
+
+### ⏳ A note on real-hardware performance
+
+The BASIC V2 interpreter on a stock 1 MHz Commodore 64 is… **slow**. Everything runs in interpreted BASIC with per-cell `POKE`s to screen and colour RAM, and each generation walks every cell to count its 8 neighbours.
+
+In practice, with the largest grid (**38 × 22 = 836 cells**), a single generation on a real C64 (and on cycle-accurate VICE) can take **more than 30 seconds**. Small grids (10×10, 15×15) are much snappier and still very entertaining.
+
+👉 So: load your pattern, press `RETURN`, grab a coffee ☕, and enjoy watching evolution happen at glorious 1980s speed. Patience is part of the retro experience 😉
+
+If you want fast, high-density simulation, use the Python HD version — it happily runs thousands of generations per second on modern hardware thanks to vectorised `numpy` steps.
 
 ---
 
