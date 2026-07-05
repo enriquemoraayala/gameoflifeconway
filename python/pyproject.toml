@@ -1,0 +1,12 @@
+[project]
+name = "gameoflifeconway"
+version = "0.1.0"
+description = "Conway's Game of Life - HD Python/pygame implementation"
+requires-python = ">=3.12,<3.13"
+dependencies = [
+    "numpy>=2.0",
+    "pygame>=2.6.1",
+]
+
+[project.scripts]
+gameoflife = "vida_hd:main"
